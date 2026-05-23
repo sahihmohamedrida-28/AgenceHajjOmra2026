@@ -1,4 +1,7 @@
 package exception;
 
-public class VoyageCompletException {
+public class VoyageCompletException extends AgenceException {
+    public VoyageCompletException(String idVoyage) {
+        super("Le voyage " + idVoyage + " est complet, plus de places.", "ERR002");
+    }
 }
