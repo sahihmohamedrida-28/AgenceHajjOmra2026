@@ -1,6 +1,5 @@
 package model.personne;
 
-
 public abstract class Personne {
 
     private String idPersonne;
@@ -13,34 +12,39 @@ public abstract class Personne {
     public Personne(String idPersonne, String nom, String prenom,
                     String cin, String telephone, String email) {
         this.idPersonne = idPersonne;
-        this.nom        = nom;
-        this.prenom     = prenom;
-        this.cin        = cin;
-        this.telephone  = telephone;
-        this.email      = email;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.cin = cin;
+        this.telephone = telephone;
+        this.email = email;
     }
 
-
-    public abstract String getRole();  //"PELERIN" ou "GUIDE"
+    // Methodes abstraites : chaque sous-classe doit les implementer
+    public abstract String getRole();
     public abstract void afficherInfos();
 
+    // Methode concrete partagee par toutes les sous-classes
     public String getNomComplet() {
         return prenom + " " + nom.toUpperCase();
     }
 
-    // Getters
+    // Getters et Setters
     public String getIdPersonne() { return idPersonne; }
-    public String getNom()        { return nom; }
-    public String getPrenom()     { return prenom; }
-    public String getCin()        { return cin; }
-    public String getTelephone()  { return telephone; }
-    public String getEmail()      { return email; }
+    public void setIdPersonne(String id) { this.idPersonne = id; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
+    public String getPrenom() { return prenom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public String getCin() { return cin; }
+    public void setCin(String cin) { this.cin = cin; }
+    public String getTelephone() { return telephone; }
+    public void setTelephone(String tel) { this.telephone = tel; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    // Setters
-    public void setIdPersonne(String idPersonne) { this.idPersonne = idPersonne; }
-    public void setNom(String nom)               { this.nom = nom; }
-    public void setPrenom(String prenom)         { this.prenom = prenom; }
-    public void setCin(String cin)               { this.cin = cin; }
-    public void setTelephone(String telephone)   { this.telephone = telephone; }
-    public void setEmail(String email)           { this.email = email; }
+    @Override
+    public String toString() {
+        return "[" + getRole() + "] " + getNomComplet()
+                + " | CIN: " + cin + " | Tel: " + telephone;
+    }
 }

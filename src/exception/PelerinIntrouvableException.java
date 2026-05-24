@@ -1,7 +1,7 @@
 package exception;
 
 public class PelerinIntrouvableException extends AgenceException {
-    public PelerinIntrouvableException(String identifiant) {
-        super("Aucun pelerin trouve avec : " + identifiant, "ERR005");
+    public PelerinIntrouvableException(String id) {
+        super("Aucun pelerin trouve avec l'identifiant : " + id, "ERR005");
     }
 }

@@ -9,9 +9,9 @@ public abstract class AgenceException extends Exception {
         this.codeErreur = codeErreur;
     }
 
+    public String getCodeErreur() { return codeErreur; }
+
     public void afficherErreur() {
         System.out.println("[ERREUR " + codeErreur + "] " + getMessage());
     }
-
-    public String getCodeErreur() { return codeErreur; }
 }
