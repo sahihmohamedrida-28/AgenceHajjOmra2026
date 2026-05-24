@@ -1,7 +1,6 @@
 package exception;
 
 public abstract class AgenceException extends Exception {
-
     private String codeErreur;
 
     public AgenceException(String message, String codeErreur) {
@@ -10,8 +9,4 @@ public abstract class AgenceException extends Exception {
     }
 
     public String getCodeErreur() { return codeErreur; }
-
-    public void afficherErreur() {
-        System.out.println("[ERREUR " + codeErreur + "] " + getMessage());
-    }
 }

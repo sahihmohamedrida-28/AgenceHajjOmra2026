@@ -1,13 +1,36 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+package main;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+import model.personne.Guide;
+import service.*;
+import ui.ConsoleMenu;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+
+        System.out.println("                                 ");
+        System.out.println(" BIENVENUE A VOTRE AGENCE DE PELERINAGE HAJJ & OMRA");
+        System.out.println("                                ");
+
+        Map<String, Guide> guidesParId = new HashMap<>();
+
+        PelerinService pelerinService = new PelerinService();
+
+        VoyageService voyageService = new VoyageService(guidesParId);
+
+        ReservationService reservationService = new ReservationService(
+                pelerinService.getPelerinsParId(),
+                voyageService.getVoyagesParId()
+        );
+
+        PaiementService paiementService = new PaiementService(reservationService);
+
+        ConsoleMenu menu = new ConsoleMenu(
+                pelerinService, voyageService,
+                reservationService, paiementService
+        );
+        menu.afficherMenuPrincipal();
     }
 }
