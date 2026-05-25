@@ -34,7 +34,6 @@ public class ReservationService {
         if (voyage.getNombrePlacesDisponibles() <= 0)
             throw new VoyageCompletException(voyage.getIdVoyage());
 
-        // Verifier si pelerin deja inscrit a ce voyage
         for (Reservation r : reservations) {
             if (r.getPelerin().getIdPersonne().equals(pelerin.getIdPersonne())
                     && r.getVoyage().getIdVoyage().equals(voyage.getIdVoyage())
@@ -45,20 +44,23 @@ public class ReservationService {
 
         compteurId++;
         String idResa = "R" + String.format("%03d", compteurId);
+
         Reservation r = new Reservation(idResa, pelerin, voyage, LocalDate.now());
         r.setStatut(Constantes.STATUT_RESA_CONFIRMEE);
+
         reservations.add(r);
-        voyage.ajouterReservation(r);
         sauvegarder();
         System.out.println("[OK] Reservation creee : " + idResa);
         return r;
     }
 
-    public void annulerReservation(String id) throws ReservationIntrouvableException {
+    public void annulerReservation(String id)
+            throws ReservationIntrouvableException {
         Reservation r = rechercherParId(id);
         if (r == null) throw new ReservationIntrouvableException(id);
         r.setStatut(Constantes.STATUT_RESA_ANNULEE);
         sauvegarder();
+        System.out.println("[OK] Reservation annulee : " + id);
     }
 
     public Reservation rechercherParId(String id) {
@@ -70,14 +72,16 @@ public class ReservationService {
     public List<Reservation> getReservationsDePelerin(String idPelerin) {
         List<Reservation> result = new ArrayList<>();
         for (Reservation r : reservations)
-            if (r.getPelerin().getIdPersonne().equals(idPelerin)) result.add(r);
+            if (r.getPelerin().getIdPersonne().equals(idPelerin))
+                result.add(r);
         return result;
     }
 
     public List<Reservation> getReservationsDuVoyage(String idVoyage) {
         List<Reservation> result = new ArrayList<>();
         for (Reservation r : reservations)
-            if (r.getVoyage().getIdVoyage().equals(idVoyage)) result.add(r);
+            if (r.getVoyage().getIdVoyage().equals(idVoyage))
+                result.add(r);
         return result;
     }
 

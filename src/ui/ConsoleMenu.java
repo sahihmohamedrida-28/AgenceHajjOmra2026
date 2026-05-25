@@ -21,7 +21,7 @@ public class ConsoleMenu {
     public void afficherMenuPrincipal() {
         boolean continuer = true;
         while (continuer) {
-            System.out.println("     AGENCE HAJJ & OMRA         ");
+            System.out.println("      AGENCE HAJJ & OMRA         ");
             System.out.println("  1. Gestion des Pelerins      ");
             System.out.println("  2. Gestion des Voyages       ");
             System.out.println("  3. Gestion des Reservations  ");

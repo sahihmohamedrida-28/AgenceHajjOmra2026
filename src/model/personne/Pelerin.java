@@ -24,7 +24,7 @@ public class Pelerin extends Personne {
 
     @Override
     public void afficherInfos() {
-        System.out.println("Pelerin: " + getNomComplet() + " | Pass: " + passeport);
+        System.out.println("Pelerin: " + getNomComplet() + ",Pass: " + passeport);
     }
 
     public int calculerAge() {

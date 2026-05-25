@@ -53,7 +53,7 @@ public class PaiementService {
             System.out.println("[ERREUR] Reservation introuvable.");
             return;
         }
-        System.out.println("=== Paiements de " + idReservation + " ===");
+        System.out.println(" -Paiements de " + idReservation + " : ");
         for (IPaiement p : r.getPaiements()) {
             System.out.println("  " + p.getModePaiement()
                     + " | " + p.getMontant() + " MAD | " + p.getDatePaiement());

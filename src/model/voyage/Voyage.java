@@ -19,14 +19,14 @@ public abstract class Voyage {
 
     public Voyage(String idVoyage, LocalDate dateDepart, LocalDate dateRetour,
                   double prixParPersonne, int capaciteMax, Guide guide) {
-        this.idVoyage = idVoyage;
-        this.dateDepart = dateDepart;
-        this.dateRetour = dateRetour;
-        this.prixParPersonne = prixParPersonne;
-        this.capaciteMax = capaciteMax;
+        this.idVoyage           = idVoyage;
+        this.dateDepart         = dateDepart;
+        this.dateRetour         = dateRetour;
+        this.prixParPersonne    = prixParPersonne;
+        this.capaciteMax        = capaciteMax;
         this.guideAccompagnateur = guide;
-        this.statutVoyage = Constantes.STATUT_PLANIFIE;
-        this.listeReservations = new ArrayList<>();
+        this.statutVoyage       = Constantes.STATUT_PLANIFIE;
+        this.listeReservations  = new ArrayList<>();
     }
 
     public abstract String getTypeVoyage();
@@ -43,14 +43,22 @@ public abstract class Voyage {
         return capaciteMax - activeResa;
     }
 
-    public void ajouterReservation(Reservation r) { this.listeReservations.add(r); }
-    public String getIdVoyage()          { return idVoyage; }
-    public LocalDate getDateDepart()     { return dateDepart; }
-    public LocalDate getDateRetour()     { return dateRetour; }
-    public double getPrixParPersonne()   { return prixParPersonne; }
-    public int getCapaciteMax()          { return capaciteMax; }
-    public String getStatutVoyage()      { return statutVoyage; }
+    public boolean ajouterReservation(Reservation r) {
+        if (getNombrePlacesDisponibles() > 0) {
+            this.listeReservations.add(r);
+            return true;
+        }
+        System.out.println("Erreur : Ce voyage a atteint sa capacite maximale.");
+        return false;
+    }
+
+    public String getIdVoyage()           { return idVoyage; }
+    public LocalDate getDateDepart()      { return dateDepart; }
+    public LocalDate getDateRetour()      { return dateRetour; }
+    public double getPrixParPersonne()    { return prixParPersonne; }
+    public int getCapaciteMax()           { return capaciteMax; }
+    public String getStatutVoyage()       { return statutVoyage; }
     public void setStatutVoyage(String st){ this.statutVoyage = st; }
-    public Guide getGuide()              { return guideAccompagnateur; }
+    public Guide getGuide()               { return guideAccompagnateur; }
     public List<Reservation> getReservations() { return listeReservations; }
 }

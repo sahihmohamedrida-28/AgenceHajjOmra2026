@@ -18,12 +18,18 @@ public class Reservation {
 
     public Reservation(String idReservation, Pelerin pelerin,
                        Voyage voyage, LocalDate dateResa) {
-        this.idReservation = idReservation;
-        this.pelerinAssocie = pelerin;
-        this.voyageChoisi = voyage;
-        this.dateDeReservation = dateResa;
-        this.statutReservation = Constantes.STATUT_RESA_EN_ATTENTE;
-        this.paiementsRealises = new ArrayList<>();
+        this.idReservation      = idReservation;
+        this.pelerinAssocie     = pelerin;
+        this.voyageChoisi       = voyage;
+        this.dateDeReservation  = dateResa;
+        this.statutReservation  = Constantes.STATUT_RESA_EN_ATTENTE;
+        this.paiementsRealises  = new ArrayList<>();
+
+        boolean ajoutReussi = voyage.ajouterReservation(this);
+        if (!ajoutReussi) {
+            System.out.println("Attention : la reservation " + idReservation
+                    + " n'a pas pu etre liee au voyage (capacite atteinte).");
+        }
     }
 
     public double getMontantTotalPaye() {
@@ -43,11 +49,11 @@ public class Reservation {
         }
     }
 
-    public String getIdReservation()        { return idReservation; }
-    public Pelerin getPelerin()             { return pelerinAssocie; }
-    public Voyage getVoyage()               { return voyageChoisi; }
-    public LocalDate getDateReservation()   { return dateDeReservation; }
-    public String getStatut()               { return statutReservation; }
-    public void setStatut(String st)        { this.statutReservation = st; }
-    public List<IPaiement> getPaiements()   { return paiementsRealises; }
+    public String getIdReservation()       { return idReservation; }
+    public Pelerin getPelerin()            { return pelerinAssocie; }
+    public Voyage getVoyage()              { return voyageChoisi; }
+    public LocalDate getDateReservation()  { return dateDeReservation; }
+    public String getStatut()              { return statutReservation; }
+    public void setStatut(String st)       { this.statutReservation = st; }
+    public List<IPaiement> getPaiements()  { return paiementsRealises; }
 }

@@ -40,7 +40,7 @@ public class PelerinRepository implements IPersistable<Pelerin> {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String ligne;
             while ((ligne = br.readLine()) != null) {
-                String[] token = ligne.split(SEP);
+                String[] token = ligne.split(SEP,-1);
                 if (token.length < 10) continue;
                 LocalDate dNaiss = DateUtils.parseDate(token[8]);
                 boolean dejaHajj = Boolean.parseBoolean(token[9]);
